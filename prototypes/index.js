@@ -390,16 +390,24 @@ const piePrompts = {
     //   cinnamon: 50,
     //   sugar: 100
     // }
+    // let piesRemaining = pie.desiredInventoryCount - pie.inventoryCount;
+    // let cinnamonRemaining = pie.ingredients.cinnamon * piesRemaining; 
+    // let sugarRemaining = pie.ingredients.sugar * piesRemaining;
+    // const result = {cinnamon: cinnamonRemaining, sugar: sugarRemaining};
+    // return result;
+
+    let ingredientKeys = Object.keys(pie.ingredients);
     let piesRemaining = pie.desiredInventoryCount - pie.inventoryCount;
-    let cinnamonRemaining = pie.ingredients.cinnamon * piesRemaining; 
-    let sugarRemaining = pie.ingredients.sugar * piesRemaining;
-    const result = {cinnamon: cinnamonRemaining, sugar: sugarRemaining};
+    let result = ingredientKeys.reduce((obj, ingredient) => {
+      obj[ingredient] = pie.ingredients[ingredient] * piesRemaining;
+      return obj;
+    }, {})
     return result;
 
     // Annotation:
     // dataset: single object
     // return: single object
-    // since we are starting with an object, i used dot notation to access the properties i wanted--some of them properties within properties--and put those values into a new returned object. 
+    // since we are starting with an object, i started by using dot notation to access the properties i wanted--some of them properties within properties--and put those values into a new returned object. Then, i realized i hadn't used any prototype methods on this prompt (and also that the ingrdient object wasn't dynamic) so i tried again. this time i got an array of ingredient keys from the ingredients property, then iterated over those with a reduce to get the object i wanted to return and created keys based on the ingredients in the keys array. 
   }
 };
 
