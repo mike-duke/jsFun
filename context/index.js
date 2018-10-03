@@ -16,11 +16,11 @@ const context = {
 
 
     // What is the value of `this` when we call ship.fly()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'global window object';
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // Because the fly function is declared outside of the SpaceProbe class and done so with an arrow function, the value of 'this' is set when the function is declared, which is in the global context.
   },
 
   exerciseB() {
@@ -30,11 +30,11 @@ const context = {
     }
     
     // What is the value of `this` when we call fn()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'global window object';
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // 'this' typically refers to an object, and since fn() is neither a method on an object nor a constructor, there is no other object for it to reference other than the global window. 
   },
 
   exerciseC() {
@@ -49,11 +49,11 @@ const context = {
     el.addEventListener("click", car.getInfo);
 
     // What is the value of `this` when a user clicks on our element and car.getInfo() is triggered?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'car object';
     return result;
 
     // Annotation: 
-    // Write your annotation here as a comment
+    // i believe that the value of this will return the car object because getInfo is invoked on the car object, and typically 'this' is set to the object upon which a method is invoked. 
   },
 
   exerciseD() {
@@ -70,11 +70,11 @@ const context = {
 
 
     // What is the value of `this` when we call dog.getBreed()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'global window object';
     return result;
 
     // Annotation: 
-    // Write your annotation here as a comment
+    // Because the getBreed() method is declared using a function literal (ES5 syntax), the context of 'this' is not set until the function is invoked, and since it would need to be invoked outside of the dog object, 'this' will reference the global window. 
   },
 
   exerciseE() {
@@ -109,11 +109,11 @@ const context = {
     const storm = new Hero('Ororo', 'weather control', true);
 
     // What is the value of `this` when we call storm.identifyHero()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'instance of Hero class (storm)';
     return result;
 
     // Annotation: 
-    // Write your annotation here as a comment
+    // Because the indentifyHero method is a property of the Hero class, and 'storm' is a new instance of that class, identifyHero will refer to the instance, 'storm'. 
   },
 
   exerciseG() {
@@ -155,11 +155,11 @@ const context = {
     obj.method();
 
     // What is the value of `this` when we call obj.arrowFunction()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'global window object';
     return result;
 
     // Annotation: 
-    // Write your annotation here as a comment
+    // i believe the value of 'this' will be the global window object because obj.method is declared with a function literal (ES5 syntax), meaning that it will not bind 'this' to the obj object at creation, but at invocation. Because the method has to be invoked outside of the object itself and despite the inner function being called with an arrow function, 'this' will be global. 
   },
 
   exerciseI() {  
@@ -191,11 +191,11 @@ const context = {
     });
 
     // What is the value of `this` when a user clicks on our #btn element and the callback is triggered?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'btn element';
     return result;
 
     // Annotation: 
-    // Write your annotation here as a comment.
+    // 'this' will be the '#btn' element in this case because jQuery specifically binds 'this' to the target object. 
   }
 
 };

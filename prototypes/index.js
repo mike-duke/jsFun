@@ -44,7 +44,11 @@ const turingPrompts = {
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // dataset: 2 arrays
+    // return: an object
+    // method: reduce
+    // dataset to iterate over: cohorts
+    // in common: module
   },
 
   modulesPerTeacher() {
@@ -61,7 +65,11 @@ const turingPrompts = {
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // dataset: two arrays
+    // return: an object with instructor keys and an array value
+    // method: reduce
+    // will need to create an array of objects with instructor names and his/her teaches array
+    // iterate over the cohorts array and within that, the curriculum array and check for matching curriculum vs teaches, then pushes the module number into the array. 
   },
 
   curriculumPerTeacher() {
