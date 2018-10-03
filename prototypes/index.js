@@ -149,7 +149,9 @@ const classPrompts = {
     //   { roomLetter: 'G', program: 'FE', capacity: 29 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = classrooms.filter((classroom) => {
+      return classroom.program === 'FE';
+    })
     return result;
 
     // Annotation:
@@ -164,21 +166,48 @@ const classPrompts = {
     //   beCapacity: 96
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    // const result = {
+    //   feCapacity: 0,
+    //   beCapacity: 0
+    // }
+
+    // classrooms.forEach((classroom) => {
+    //   if (classroom.program === 'FE') {
+    //     result.feCapacity += classroom.capacity;
+    //   } else if (classroom.program === 'BE') {
+    //     result.beCapacity += classroom.capacity;
+    //   }
+    // })
+    const result = classrooms.reduce((totals, currentClassroom) => {
+      if (currentClassroom.program === 'FE') {
+        totals.feCapacity += currentClassroom.capacity;
+      } else if (currentClassroom.program === 'BE') {
+        totals.beCapacity += currentClassroom.capacity;
+      }
+      return totals;
+    }, {feCapacity: 0, beCapacity: 0})
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // dataset: single array
+    // return: object
+    // method: reduce
+    // since we are starting with an array of classrooms and returning an object, i intended to use a reduce to iterate over the classrooms array. On my first attempt, i couldn't quite figure out how to make the reduce work, so i assigned result to an object with the keys i wanted and used a forEach to iterate over the array and assign the value of the results object properties to add the capacity whenever the program matched. After i made that work, i was able to figure out how to make the reduce work. 
   },
 
   sortByCapacity() {
     // Return the array of classrooms sorted by their capacity (least capacity to greatest)
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = classrooms.sort((a, b) => {
+      return a.capacity - b.capacity;
+    })
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // dataset: single array
+    // return: a sorted array
+    // method: sort
+    // since we are working with an array of classrooms and we're just looking to sort that array, i used sort to iterate over the array and sort the objects in the array by their capacity, which i accessed using dot notation.
   }
 };
 
