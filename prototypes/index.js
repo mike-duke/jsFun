@@ -6,6 +6,7 @@ const { clubs } = require('./datasets/clubs');
 const { classrooms } = require('./datasets/classrooms');
 const { mods } = require('./datasets/mods');
 const { bosses, sidekicks } = require('./datasets/bosses');
+const { kitties } = require('./datasets/kitties');
 
 // DATASET: instructors, cohorts from ./datasets/turing
 const turingPrompts = {
@@ -546,21 +547,34 @@ const kittyPrompts = {
     // Return an array of just the names of kitties who are orange e.g.
     // ['Tiger', 'Snickers']
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = kitties.filter((kitty) => {
+      return kitty.color === 'orange'
+    }).map((kitty) => {
+      return kitty.name;
+    })
+    
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // dataset: single array
+    // return: array of a different length
+    // method: filter
+    // since we are working from a single array and returning a single array that is a subset of the original array, i used filter to iterate over the kitties array and return just the kitty objects that had the color of 'orange'. Then, since i had an array of the correct length, but had more information in it than just the kitty name, i used map to return just the name of the kitty. 
   },
 
   sortByAge() {
     // Sort the kitties by their age
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = kitties.sort((kittyA, kittyB) => {
+      return kittyA.age - kittyB.age;
+    });
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // dataset: single array
+    // return sorted array
+    // method: sort
+    // since we started with a single array and wanted it sorted, i used the sort method on the kitties array. i was not able to invoke just the method to sort the array because the elements of the array are objects, so i used a callback function to sort the array by age by accessing the age using dot notation.
   },
 
   growUp() {
@@ -576,7 +590,17 @@ const kittyPrompts = {
     //   color: 'orange'
     // },
     // ...etc]
-  };
+    const result = kitties.map((kitty) => {
+      kitty.age += 2;
+      return kitty;
+    })
+    return result;
+
+    // Annotation:
+    // dataset: single array
+    // return: array of the same length
+    // method: map
+  }
 };
 
 
@@ -594,7 +618,7 @@ const kittyPrompts = {
 
 
 
-// DATASET: bosses, sidekicks from ./datasets/bosses
+// DATASET: constellations, stars from ./datasets/astronomy
 const astronomyPrompts = {
   starsInConstellations() {
     // Return an array of all the stars that appear in any of the constellations

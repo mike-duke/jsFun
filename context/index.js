@@ -34,7 +34,7 @@ const context = {
     return result;
 
     // Annotation:
-    // 'this' typically refers to an object, and since fn() is neither a method on an object nor a constructor, there is no other object for it to reference other than the global window. 
+    // 'this' typically refers to an object, and since fn() is neither a method on an object nor a constructor, there is no other object for it to reference other than the global window, which does not have a property of 'value'. 
   },
 
   exerciseC() {
@@ -86,11 +86,11 @@ const context = {
 
 
     // What is the value of `this` when we call fn()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = '21';
     return result;
 
     // Annotation: 
-    // Write your annotation here as a comment
+    // i relized this halfway through typing my original annotation: the function would return 21 because, while 'this' is referring to the global object, the 'value' variable was called without a keyword, which typically assignes it as a global variable. Thus, even though 'this' references the global, the global now has a variable called 'value'.
   },
 
   exerciseF() {
@@ -137,11 +137,11 @@ const context = {
 
 
     // What is the value of `this` when we call monopoly.restart()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'Monopoly';
     return result;
 
     // Annotation: 
-    // Write your annotation here as a comment
+    // when the class Game is invoked to construct the object monopoly, restart would be a property of that new monopoly object. Since the 'restart' method uses the property 'this.title', and it's being invoked on teh monopoly object, the value of 'this' will be 'Monopoly'
   },
 
   exerciseH() {
@@ -155,11 +155,11 @@ const context = {
     obj.method();
 
     // What is the value of `this` when we call obj.arrowFunction()?
-    const result = 'global window object';
+    const result = 'obj object';
     return result;
 
     // Annotation: 
-    // i believe the value of 'this' will be the global window object because obj.method is declared with a function literal (ES5 syntax), meaning that it will not bind 'this' to the obj object at creation, but at invocation. Because the method has to be invoked outside of the object itself and despite the inner function being called with an arrow function, 'this' will be global. 
+    // i am very confused by this one. my best (hopefully educated) guess is that invoking 'obj.arrowFunction()' will return the whole 'obj' object. What i believe is happening here is that 'arrow function' is initially set to null, but it's value is reassigned when 'method()' is invoked. Since it is, in fact, an arrow function, it should set it's context for 'this' when this reassign happens, and since the function's only purpose is to return 'this', it will return the object. 
   },
 
   exerciseI() {  
@@ -178,11 +178,12 @@ const context = {
     }, poets)
 
     // What is the value of `this` that gets returned on each iteration of poets.map()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'poets array, four times';
     return result;
 
     // Annotation: 
     // Write your annotation here as a comment. Annotation should include explanation regarding the second argument of `poets` that is being passed
+    // What i believe is happening with this one is that we are binding 'this' to the poets array when we add 'poets' as the second argument to the map function. Because of this, when it maps over the array, it will just return the array four times. 
   },
 
   exerciseJ() {
