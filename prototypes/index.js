@@ -590,6 +590,7 @@ const kittyPrompts = {
     //   color: 'orange'
     // },
     // ...etc]
+
     const result = kitties.map((kitty) => {
       kitty.age += 2;
       return kitty;
@@ -601,6 +602,7 @@ const kittyPrompts = {
     // return: array of the same length
     // method: map
     // since we started with a single array and needed an array of the same length, i used map to iterate over the kitties array and change the value of the age property on each kitty, then returned the kitty. 
+
   }
 };
 
@@ -693,5 +695,6 @@ module.exports = {
   classPrompts,
   modPrompts,
   kittyPrompts,
+  cakePrompts,
   astronomyPrompts
 };
