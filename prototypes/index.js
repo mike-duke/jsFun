@@ -600,6 +600,7 @@ const kittyPrompts = {
     // dataset: single array
     // return: array of the same length
     // method: map
+    // since we started with a single array and needed an array of the same length, i used map to iterate over the kitties array and change the value of the age property on each kitty, then returned the kitty. 
   }
 };
 
