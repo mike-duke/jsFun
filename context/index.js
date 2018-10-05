@@ -49,7 +49,7 @@ const context = {
     el.addEventListener("click", car.getInfo);
 
     // What is the value of `this` when a user clicks on our element and car.getInfo() is triggered?
-    const result = 'car object';
+    const result = 'car';
     return result;
 
     // Annotation: 
@@ -86,11 +86,11 @@ const context = {
 
 
     // What is the value of `this` when we call fn()?
-    const result = '21';
+    const result = 'global window object';
     return result;
 
     // Annotation: 
-    // i relized this halfway through typing my original annotation: the function would return 21 because, while 'this' is referring to the global object, the 'value' variable was called without a keyword, which typically assignes it as a global variable. Thus, even though 'this' references the global, the global now has a variable called 'value'.
+    // i relized this halfway through typing my original annotation: the function would return the value '21' because, while 'this' is referring to the global object, the 'value' variable was called without a keyword, which typically assignes it as a global variable. Thus, even though 'this' references the global, the global now has a variable called 'value'.
   },
 
   exerciseF() {
@@ -109,7 +109,7 @@ const context = {
     const storm = new Hero('Ororo', 'weather control', true);
 
     // What is the value of `this` when we call storm.identifyHero()?
-    const result = 'instance of Hero class (storm)';
+    const result = 'instance of Hero';
     return result;
 
     // Annotation: 
@@ -137,7 +137,7 @@ const context = {
 
 
     // What is the value of `this` when we call monopoly.restart()?
-    const result = 'Monopoly';
+    const result = 'monopoly';
     return result;
 
     // Annotation: 
@@ -155,7 +155,7 @@ const context = {
     obj.method();
 
     // What is the value of `this` when we call obj.arrowFunction()?
-    const result = 'obj object';
+    const result = 'obj';
     return result;
 
     // Annotation: 
@@ -178,12 +178,11 @@ const context = {
     }, poets)
 
     // What is the value of `this` that gets returned on each iteration of poets.map()?
-    const result = 'poets array, four times';
+    const result = 'poets';
     return result;
 
     // Annotation: 
-    // Write your annotation here as a comment. Annotation should include explanation regarding the second argument of `poets` that is being passed
-    // What i believe is happening with this one is that we are binding 'this' to the poets array when we add 'poets' as the second argument to the map function. Because of this, when it maps over the array, it will just return the array four times. 
+    // The second argument of 'poets' in the map function is the optional 'this' binding available on many array prototype methods. Because we've bound 'this' to the poets array, when it maps over the array it will just return the array four times. 
   },
 
   exerciseJ() {
@@ -192,11 +191,11 @@ const context = {
     });
 
     // What is the value of `this` when a user clicks on our #btn element and the callback is triggered?
-    const result = 'btn element';
+    const result = '#btn';
     return result;
 
     // Annotation: 
-    // 'this' will be the '#btn' element in this case because jQuery specifically binds 'this' to the target object. 
+    // 'this' will be the '#btn' element in this case because jQuery specifically binds 'this' to the target object. Also, since ES5 syntax does not set the value of this until the function is invoked, it will set that value to the element that was clicked. 
   }
 
 };
