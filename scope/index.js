@@ -260,9 +260,10 @@ const scope = {
     // Log D: fruit
 
     const result = [
-      {'A': 'mango'},
+      {'A': 'mango'},  //reference error
       {'B': 'mango'},
-
+      {'C': 'mango'},
+      {'D': 'apple'}
     ]
     return result;
 
@@ -293,7 +294,7 @@ const scope = {
       // Log C: newNum
     }
 
-    const fn2 = function(num){
+    const fn2 = function(num) {
       // Log D: num
 
       num = num + 1;
@@ -303,11 +304,17 @@ const scope = {
 
     fn1();
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      {'A': 4},
+      {'D': 6},
+      {'E': 10},
+      {'B': 9},
+      {'C': 4}
+    ]
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // On line 275, we declare a variable called num and assign it to the number 6. On line 277, we declare a function called fn1, but this has not been invloked yet, so we move to line 297. Here, we declare another function called fn2, but it has also not been invoked, so we move to line 305. Here, fn1 is invoked, so we step into the function at line 278. We declare a variable called num and assign it the number 4. We move to line 280, and console.log the value of number, which will be 4. We then use an if statement to check to see if the value of num is less than 5. It is, so we step into the if statement on line 283 and declare a new variable called num and assign it the number 9. Next, we invoke the function fn2 and pass it the value of num. This will move us into fn2 on line 298, where we console.log the value of num. Since fn2 was declared in the global scope, the context for the console.logs inside it will be global. As such, on line 298, we will log 6. However, because we passed num into the function, when we reassign num on line 300, it will replace 6 with 10. This resolves the function invocation on line 285, so we move to line 287, where we declare a new constant variable called newNum and assign it the value of num. On line 289, we console.log the value of num again, which in this cast should be 9. We then step out of the if statement and move to line 292, where we reassign the value of newNum to num. newNum does not exist in this scope, though, as we are in the function scope of fn1, and newNum was declared within the child scope of the if statement. As such, newNum is declared without a keyword, and so it traverses up the scope chain until it is assigned to the global scope. The value of newNum is, however, defined within the scope where newNum was declared, and so, on line 302, we will log 4, as that is the value of num inside the function scope of fn1.
   },
 
   exerciseI() {
@@ -334,11 +341,19 @@ const scope = {
     eatSnack();
     // Log E: hunger
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      {'A': 75},
+      {'B': 0},
+      {'C': 75},
+      {'D': 80},
+      {'A': 55},
+      {'B': 0},
+      {'C': 55}
+    ]
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // On line 321, we declare a variable in the global scope called hunger and assign it the value of the number 100. Then, on line 323, we declare a function called eatSnack that we are not invoking yet. We move down to line 336, where eatSnack is invoked, and so we step into the function at line 324. Here, we reassign hunger to the value of itself minus 25, which would resolve to 75. On 325, we console.log the value of hunger, which will, as i said, be 75. Then, on line 326, we invoke the function gorgeYourself. On line 328, we declare gorgeYourself within the scope of eatSnack. Since it's already been invoked, we go ahead and step into gorgeYourself at line 329. Here, we declare a new constant variable called hunger and assign it the value of 0. We then console.log hunger again on 330, which will return 0. That will resolve the function invocation on line 326, so we move to line 333 and log hunger again, which will again return 75 since we are still in the scope of eat snack but outside of gorgeYourself. That will resolve the function call on line 336, so we move to line 338 and reassign hunger to the value of itself plus 5. We then console.log that value, which will be 80. On line 41, we invoke eatSnack again, and so we return to line 324. Here we will reassign hunger again to the value of itself minus 25, and then log that value on the next line, which will return 55. On line 326, we invoke gorgeYourself again, which is declared on line 328, and begins on line 329. Here we again declare the constant variable hunger and assign it to zero, and again log that value on 330. We then step out of gorgeYourself and move to line 333, which will log hunger again and return 55. That will resolve the function invokation on line 341.
   },
 
   exerciseJ() {
@@ -375,11 +390,18 @@ const scope = {
     // Log E: sandwich
     // Log F: amandaBynes
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      {'A': 'ketchup sandwich'},
+      {'D': 'gouda'},
+      {'B': 'undefined'},
+      {'C': 'not a mediocre sandwich'},
+      {'E': 'not a mediocre sandwich'},
+      {'F': 'National Treasure'}
+    ]
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // On line 360, we declare a variable called sandwich and assign it the string 'ketchup sandwich'. On line 362, we console.log the value of sandwich, which will be 'ketchup sandwich'. On line 364, we declare a function called addChipotle, but it has not bee invoked yet, so we move to line 375 where we declare another function called addCheese. This has also not been invoked, so we move down to line 386, where we declare a variable in the global scope without a keyword called cheeseTopping and assign it the string 'kraft'. On line 387 we invoke the function addCheese, so we step into the function on line 376. Here we declare a new, function scoped variable called cheeseTopping and assign it the string 'gouda'. Next, we console.log the value of cheeseTopping, which will be 'gouda'. On line 379, we declare a function called shesTheManReference within the function addCheese, but this has not yet been invoked, so we move to line 383. Here, the function shesTheManReference is invoked, so we step into the function on line 380. Here, we declare a variable called amandaBynes without a keyword and assign it the string, 'National Treasure'. The declaration of amandaBynes will travel up the scope chain and end up globally scoped. This will resolve the function invocation on line 383. This will also resolve the function invocation on line 387. On line 389, we invoke the function addChipotle, so we will step into that function on line 365. Here we console.log the value of toppings. Since toppings is declared with the keyword 'var', its declaration will be hoisted to the top of the function scope, but not the assignment of its value. As such, the console.log on 365 will return 'undefined'. Next, we will declare the variable toppings and assign it the value of 'chipotle sauce'. On line 368, we use an if statement to check if the value of toppings is 'chipotle sauce', which it is, so we will step into the if statement on line 369. Here, we reassign the value of sandwich to the string 'not a mediocre sandwich'. We then step out of the if statement and move to line 372, where we console.log the value of sandwich, which will be 'not a mediocre sandich'. This will resolve the function invocation on line 389, so we will move on to the console.log on line 390, which will log the value of 'sandwich', which will again be 'not a mediocre sandwich'. Finally, we will console.log the value of amandaBynes, which will be 'National Treasure'.
   },
 
   exerciseK() {
@@ -396,11 +418,14 @@ const scope = {
 
     // Log B: num
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      {'A': 7},
+      {'B': 7}
+    ]
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // On line 408, we declare the variable num and assign it the number 10. On line 410, we declare the function foo, but we have not invoked it yet, so we move down to line 417. Here we invoke the function foo, so we step into that function on line 411. Here we check that the value of num is greater than 5 using an if statement. It is, so we step into the if statement on line 412. Here we reassign the value of num to 7. We then step out of the if statement and move to line 414, where we log the value of num, which will be 7. That will resolve the function invocation on line 417, so we move to line 419, where we will log the value of num again, which will again be 7. 
   },
 
   exerciseL() {
@@ -428,11 +453,15 @@ const scope = {
 
     // Log C: grade
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      {'A': 95},
+      {'B': 90},
+      {'C': 90}
+    ]
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // On line 432, we declare a variable in the global scope called 'grade' and assign it the value of 100. We then move to line 434, where we declare the function losePoints, but this has not yet been invoked, so we move down to line 452. Here, we invoke the function losePoints, so we step into the function on line 435. We reassign the value of grade to 90. On line 437, we declare a function called addPoints within the scope of lose points, but this has not been invoked yet, so we move to line 447. Here we invoke addPoints, so we step into the function on line 438. We declare a new constant variable called grade and assign it the value 95. On line 440, we use an if statement to check if the value of grade is strictly equal to 95. It is, so we step into the if statement on line 441 and declare a new, block scoped variable called grade and assign it the value 97. We step out of the if statement and move to line 444. Here we log the value of grade, which will be 95 since we are still in the function scope of addPoints. This will resolve the function ivocation on line 447, so we move down to line 449, where we console.log grade again. This will be 90 since we are now in the function scope of losePoints. This will resovle the funciton invocation on line 452, so we move down to line 454, where we will console.log grade one last time. The value here will be 90. 
   },
 
   exerciseM() {
@@ -454,11 +483,16 @@ const scope = {
 
     // Log D: num
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      {'A': 5},
+      {'B': 6},
+      {'C': 6}, //reference error
+      {'D': 6}
+    ]
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // On line 468, we declare a variable in the global scope caled num and assign it the value 5. We then move to line 470, where we declare a function called first, but this has not been invoked yet, so we move to line 476 where we declare a function called second. This has also not been invoked, so we move to line 481. Here we invoke the funciton first, so we step into that function on line 471. Here we log the value of num, which will be 5. Then, on line 472, we reassign num to the value of 6. We move to line 473, where we log num again, which will be 6. This will resolve the function invocation on line 481, so we move to line 482, where we invoke the function 'second'. We step into 'second' in line 477, where we log num again, which will be 6. Next, we declare a new function scoped variable called num and assign it the value of 7. That resolves the function invocation on line 482. We move down to line 484 and log num one last time, which will return 6.
   },
 
   exerciseN() {
@@ -497,14 +531,14 @@ const scope = {
       {'E': 'Pam'},
       {'A': 'Pam'},
       {'B': 'Pam'},
-      {'C': 'Lousia'},
+      {'C': 'Louisa'},
       {'D': 'Louisa'},
       {'E': 'Louisa'}
     ]
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // On line 499, we declare a variable in the global scope called instructor and assign it the string 'Pam'. Next, we declare the function changeInstructor, but we do not invoke it yet, so we move to line 524. Here, we log the value of instructor, which will be 'Pam'. Next, on line 526, we invoke the function changeInstrtuctor, so we step into the function on line 503. Here, we log the value of instructor again, which will again be 'Pam'. Next, we use an if statement to check if the value of instructor is 'Brittany', which it is not. As such, we step into the else statement on line 508, where we declare a new, block scoped variable called instructor and assign it the value of 'Brittany'. We then step out of the if statement and move to line 511 where we log instructor again, which since we are outside of the if block, will again be 'Pam'. On line 513, we declare a new function called rename within the scope of changeInstructor, but it has not been invoked yet, so we move to line 518. Here, we invoke rename, so we step into the function on line 514. Here we reassign the value of instructor to 'Lousia', and then on the next line we log instructor, which will be 'Louisa'. That resoves the function invocation on line 518, so we move to line 520, where we log the value of instructor again. This will log 'Louisa'. That resolves the function invocation on line 526, so we move down to line 528, where we log instructor one more time, and, one more time, get 'Louisa'.
   },
 
   exerciseO() {

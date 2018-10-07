@@ -16,7 +16,7 @@ const context = {
 
 
     // What is the value of `this` when we call ship.fly()?
-    const result = 'global window object';
+    const result = 'global window object'
     return result;
 
     // Annotation:
@@ -137,7 +137,7 @@ const context = {
 
 
     // What is the value of `this` when we call monopoly.restart()?
-    const result = 'monopoly';
+    const result = 'monopoly';  //global window object
     return result;
 
     // Annotation: 
