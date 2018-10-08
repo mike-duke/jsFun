@@ -331,7 +331,7 @@ const scope = {
       }
 
       // Log C: hunger
-    };
+    }
 
     eatSnack();
 
@@ -353,7 +353,7 @@ const scope = {
     return result;
 
     // Annotation:
-    // On line 321, we declare a variable in the global scope called hunger and assign it the value of the number 100. Then, on line 323, we declare a function called eatSnack that we are not invoking yet. We move down to line 336, where eatSnack is invoked, and so we step into the function at line 324. Here, we reassign hunger to the value of itself minus 25, which would resolve to 75. On 325, we console.log the value of hunger, which will, as i said, be 75. Then, on line 326, we invoke the function gorgeYourself. On line 328, we declare gorgeYourself within the scope of eatSnack. Since it's already been invoked, we go ahead and step into gorgeYourself at line 329. Here, we declare a new constant variable called hunger and assign it the value of 0. We then console.log hunger again on 330, which will return 0. That will resolve the function invocation on line 326, so we move to line 333 and log hunger again, which will again return 75 since we are still in the scope of eat snack but outside of gorgeYourself. That will resolve the function call on line 336, so we move to line 338 and reassign hunger to the value of itself plus 5. We then console.log that value, which will be 80. On line 41, we invoke eatSnack again, and so we return to line 324. Here we will reassign hunger again to the value of itself minus 25, and then log that value on the next line, which will return 55. On line 326, we invoke gorgeYourself again, which is declared on line 328, and begins on line 329. Here we again declare the constant variable hunger and assign it to zero, and again log that value on 330. We then step out of gorgeYourself and move to line 333, which will log hunger again and return 55. That will resolve the function invokation on line 341.
+    // On line 321, we declare a variable in the global scope called hunger and assign it the value of the number 100. Then, on line 323, we declare a function called eatSnack that we are not invoking yet. We move down to line 336, where eatSnack is invoked, and so we step into the function at line 324. Here, we reassign hunger to the value of itself minus 25, which would resolve to 75. On 325, we console.log the value of hunger, which will, as i said, be 75. Then, on line 326, we invoke the function gorgeYourself. On line 328, we declare gorgeYourself within the scope of eatSnack. Since it's already been invoked, we go ahead and step into gorgeYourself at line 329. Here, we declare a new constant variable called hunger and assign it the value of 0. We then console.log hunger again on 330, which will return 0. That will resolve the function invocation on line 326, so we move to line 333 and log hunger again, which will again return 75 since we are still in the scope of eat snack but outside of gorgeYourself. That will resolve the function call on line 336, so we move to line 338 and reassign hunger to the value of itself plus 5. We then console.log that value, which will be 80. On line 41, we invoke eatSnack again, and so we return to line 324. Here we will reassign hunger again to the value of itself minus 25, and then log that value on the next line, which will return 55. On line 326, we invoke gorgeYourself again, which is declared on line 328, and begins on line 329. Here we again declare the constant variable hunger and assign it to zero, and again log that value on 330. We then step out of gorgeYourself and move to line 333, which will log hunger again and return 55. That will resolve the function invocation on line 341.
   },
 
   exerciseJ() {
@@ -393,7 +393,7 @@ const scope = {
     const result = [
       {'A': 'ketchup sandwich'},
       {'D': 'gouda'},
-      {'B': 'undefined'},
+      {'B': undefined},
       {'C': 'not a mediocre sandwich'},
       {'E': 'not a mediocre sandwich'},
       {'F': 'National Treasure'}
@@ -533,7 +533,7 @@ const scope = {
       {'B': 'Pam'},
       {'C': 'Louisa'},
       {'D': 'Louisa'},
-      {'E': 'Louisa'}
+      {'F': 'Louisa'}
     ]
     return result;
 
