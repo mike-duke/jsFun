@@ -186,7 +186,8 @@ const context = {
   },
 
   exerciseJ() {
-    $('#btn').on('click', function() {
+    const el = $('#btn');
+    el.on('click', function() {
       console.log($(this));
     });
 
@@ -196,6 +197,21 @@ const context = {
 
     // Annotation: 
     // 'this' will be the '#btn' element in this case because jQuery specifically binds 'this' to the target object. Also, since ES5 syntax does not set the value of this until the function is invoked, it will set that value to the element that was clicked. 
+    // Write your annotation here as a comment.
+  },
+
+  exerciseK() {
+    const el = $('#btn');
+    el.on('click', () => {
+      console.log(this);
+    });
+
+    // What is the value of `this` when a user clicks on our #btn element and the callback is triggered?
+    const result = 'REPLACE WITH YOUR RESULT HERE';
+    return result;
+
+    // Annotation: 
+    // Write your annotation here as a comment.
   }
 
 };

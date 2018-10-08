@@ -563,6 +563,31 @@ const scope = {
 
     // Annotation:
     // On line 469, we declare a variable in the global scope called shoe and assign it the string 'flipflop'. Then, on line 471, we declare a function in the global scope called 'putOnShoe'. That is not invoked yet, so we move down to line 476 and console.log shoe, which will return the value 'flipflop'. Next, we invoke the function putOnShoe, which returns us to line 472. There, we console.log the shoe variable again. In this case, the value of shoe will be undefined because there is a new variable declaration for shoe on line 473 that will be hoisted. After the console.log, the new variable declaration 'shoe' will be assigned the value 'boot'. putOnShoe concludes, which resolves line 477, so we move on to line 478, where we console.log the variable shoe once again. This time, since we are back in the global scope, the log will again return the value of 'flipflop'.
+  },
+
+  exerciseP() {
+    function orderLunch() {
+      if (typeof lunch === 'undefined') {
+        // Log A: lunch
+        let lunch = 'sandwich';
+      }
+
+      if (typeof lunch === 'undefined') {
+        lunch = 'soup';
+      }
+
+      // Log B: lunch
+    }
+
+    orderLunch();
+
+    // Log C: lunch
+
+    const result = 'REPLACE WITH YOUR RESULT HERE';
+    return result;
+
+    // Annotation:
+    // Write your annotation here as a comment
   }
 }
 
