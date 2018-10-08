@@ -32,7 +32,7 @@ const turingPrompts = {
     //  method: map
     //  dataset to iterate over: instructors
     //  in common: module
-    //  
+    //  Since we are working with two arrays and we need to return an array of the same length as the instructors array, i used map to iterate over that array. We also needed to retrieve the value of the number of students per module, so i used find on the cohorts array inside of the map. Find works because we were getting the unique value of the studentCount per module. I had the find's callback return the value of the cohort that had a matching module number to the individual instructor's module. I then had the map's callback return an object with the instructor's name from the instructors array and the student count from the cohort array. 
   },
 
   studentsPerInstructor() {
@@ -42,15 +42,21 @@ const turingPrompts = {
     // cohort1804: 10.5
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cohorts.reduce((obj, cohort) => {
+      let instructorsPerModule = instructors.filter((instructor) => {
+        return instructor.module === cohort.module
+      })
+      obj[`cohort${cohort.cohort}`] = cohort.studentCount / instructorsPerModule.length
+      return obj;
+    }, {})
     return result;
-
     // Annotation:
     // dataset: 2 arrays
     // return: an object
     // method: reduce
     // dataset to iterate over: cohorts
     // in common: module
+    // Since we need an object with the numbers of each cohort as its keys, i used reduce to iterate over the cohorts array. i then used filter to iterate over the instructors array and return an array with each instructor whose module number matched that of the current cohort. Once i had that, i set the key of the result object using a template literal and assigned its value the number of students per cohort divided by the length of each filtered instructor array. 
   },
 
   modulesPerTeacher() {
@@ -63,15 +69,24 @@ const turingPrompts = {
     //   Pam: [2, 4]
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = instructors.reduce ((obj, instructor) => {
+      obj[instructor.name] = []
+      cohorts.forEach((cohort) => {
+        instructor.teaches.forEach((lesson) => {
+          if (cohort.curriculum.includes(lesson) && !obj[instructor.name].includes(cohort.module)) {
+            obj[instructor.name].push(cohort.module)
+          }
+        })
+      })
+      return obj
+    }, {})
     return result;
 
     // Annotation:
     // dataset: two arrays
     // return: an object with instructor keys and an array value
     // method: reduce
-    // will need to create an array of objects with instructor names and his/her teaches array
-    // iterate over the cohorts array and within that, the curriculum array and check for matching curriculum vs teaches, then pushes the module number into the array. 
+    // Since we needed an object with the names of each instructor as our result, i used reduce to iterate over the instructors array. i first declared the key for the object that reduce's callback would return, then assigned the value to an empty array. Next, i used forEach to iterate over the cohorts array, and then inside of that used another forEach to iterate over instructors again. This ensured each time through the instructors loop, i could check the cohort curriculum array against the instructors array. With that in mind, i used an if statement to check that each item in the teaches array would check itself against the curriculum array and return true if they matched. I also checked to make sure that i had not already pushed the module number into the empty array. If both of these conditions were met, i used push to put the number of the module into the accumulator's empty array. From there, i just returned the accumulator. 
   },
 
   curriculumPerTeacher() {
@@ -84,11 +99,25 @@ const turingPrompts = {
     //   recursion: [ 'Pam', 'Leta' ]
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cohorts.reduce((obj, cohort) => {
+      cohort.curriculum.map((topic) => { 
+        return obj[topic] = instructors.filter((instructor) => {
+          return instructor.teaches.includes(topic);
+        }).map((instructor) => {
+          return instructor.name;
+        });
+      });
+      return obj;
+    }, {});
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // dataset: two arrays
+    // return: object
+    // method: reduce
+    // dataset to itereate over: cohorts
+    // data in common: items in curriculum and teaches arrays
+    // Since we are starting with two arrays and we need to return an object, i used reduce to iterate over the cohorts array. Also, since the keys to that object were going to be the items in the curriculum array, i used map to iterate over that array in each cohort. From map's callback, i returned a declaration of the outer reduce's accumulator using the individual topic and assigned that the value of a filter over the instructors array. From the filter's callback, i returned the instructors who had the topic in their teaches array. i chained a map to that so that i could get just the instructor names, then returned the accumulator.
   }
 };
 
@@ -566,7 +595,7 @@ const kittyPrompts = {
     // Sort the kitties by their age
 
     const result = kitties.sort((kittyA, kittyB) => {
-      return kittyA.age - kittyB.age;
+      return kittyB.age - kittyA.age;
     });
     return result;
 
@@ -639,11 +668,23 @@ const astronomyPrompts = {
     //     color: 'red' }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = Object.keys(constellations).reduce((arr, constellationKey) => {
+      const starArray = stars.filter((star) => {
+        return (constellations[constellationKey].stars).includes(star.name);
+      })
+      starArray.forEach((star) => {
+        arr.push(star)
+      })
+      // arr.push(...starArray)
+      return arr; 
+    }, [])
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // dataset: an object and an array
+    // return : an array of a different length
+    // methods: object.keys, filter(?), [reduce]
+    // Since we started with an object of constellations from which we need to use the array of stars, i started by using Object.keys to get an array of the keys for constellations. As we are looking to return an array, i decided to use a reduce to iterate over the keys array, intending to use that to access the stars array within in the constellations object. Inside the reduce, i used a filter to iterate over the stars array and access each star. The conditional i used in the return for the filter's callback looked to see if the name of the star is included in the array at the constellation object's 'stars' array. This produces an array of smaller arrays, which i then used a for each to loop over and push each value into the accumulator. 
   },
 
   starsByColor() {
@@ -657,11 +698,21 @@ const astronomyPrompts = {
     //   red: [{obj}]
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = stars.reduce((obj, star) => {
+      if (obj[star.color]) {
+        obj[star.color].push(star);
+      } else {
+        obj[star.color] = [star]
+      }
+      return obj;
+    }, {})
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // dataset: stars array;
+    // return: object;
+    // method: reduce;
+    // Since we only needed information from the stars array to finish this prompt, i did not need to access the constellation object. Since we needed an object as the result, i used a reduce on the stars array. First, i had it check to make sure that a key in the new object did not already have the name of a color. If it did, i just pushed the star object into the value of that property. If it did not, i had it create the key and assigned it's value to an array with the star's infornmation inside. 
   },
 
   constellationsStarsExistIn() {
@@ -677,11 +728,20 @@ const astronomyPrompts = {
     //   'Orion',
     //   'Centaurus' ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = stars.sort((starA, starB) => {
+      return starA.visualMagnitude - starB.visualMagnitude;
+    }).map((star) => {
+      return star.constellation
+    }).filter((constellation) => {
+      return constellation !== '';
+    })
     return result;
 
-    // Annotation:
-    // Write your annotation here as a comment
+  // Annotation:
+  // dataset: stars array
+  // return: array
+  // method: map, (sort first), (filter last)
+  // Since the data we need is encapsulated in the stars array, i started with only that dataset. After some trial and error, i realized that i needed to sort this array by visualMagnitude first, then map over it to return just the name of the contellation, then filter it to remove the value that was an empty string. 
   }
 };
 
