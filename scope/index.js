@@ -260,7 +260,7 @@ const scope = {
     // Log D: fruit
 
     const result = [
-      {'A': 'mango'},  //reference error
+      {'A': 'reference error'},  //reference error
       {'B': 'mango'},
       {'C': 'mango'},
       {'D': 'apple'}
@@ -306,7 +306,7 @@ const scope = {
 
     const result = [
       {'A': 4},
-      {'D': 6},
+      {'D': 9},
       {'E': 10},
       {'B': 9},
       {'C': 4}
@@ -348,7 +348,8 @@ const scope = {
       {'D': 80},
       {'A': 55},
       {'B': 0},
-      {'C': 55}
+      {'C': 55},
+      {'E': 55}
     ]
     return result;
 
@@ -486,7 +487,7 @@ const scope = {
     const result = [
       {'A': 5},
       {'B': 6},
-      {'C': 6}, //reference error
+      {'C': 'reference error'},
       {'D': 6}
     ]
     return result;
@@ -583,11 +584,15 @@ const scope = {
 
     // Log C: lunch
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      {'A': 'referenceError'},
+      {'B': 'soup'},
+      {'C': 'soup'}
+    ]
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // On line 569, we declare a new function orderLunch, which has not been invloked yet, so we move down to line 582. Here, orderLunch is invoked, so we go back up to line 570. Here we use an if statement to check the typeof lunch. Lunch is declared on line 572, but it's declared with let, so there is no hoisting available. If the console.log on A does actually run, it will return a reference error. On line 575, we check the typeof lunch again with another if statement, which will be true, so we step into the if statement on line 576. Here, we declare lunch without a keyword, so this will traverse up the scope chain to end up declared on the global scope. Lunch is assigned to 'soup'. We step out of the if statement and console.log lunch again on line 579. Here, it will be 'soup'. This will resolve the function invocation on line 582, so we move to line 584, where we console.log lunch again. It will again be 'soup'.
   }
 }
 

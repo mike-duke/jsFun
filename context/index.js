@@ -197,7 +197,6 @@ const context = {
 
     // Annotation: 
     // 'this' will be the '#btn' element in this case because jQuery specifically binds 'this' to the target object. Also, since ES5 syntax does not set the value of this until the function is invoked, it will set that value to the element that was clicked. 
-    // Write your annotation here as a comment.
   },
 
   exerciseK() {
@@ -207,7 +206,7 @@ const context = {
     });
 
     // What is the value of `this` when a user clicks on our #btn element and the callback is triggered?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'global window object'
     return result;
 
     // Annotation: 
